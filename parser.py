@@ -11,8 +11,7 @@ limit = -1
 # Start with line 2 for CSV Export
 for line in data.split("\n")[1:]:
     if (limit == 0):
-        print
-        "Processing limit reached."
+        print("Processing limit reached.")
         sys.exit(0)
     if (len(line) == 0):
         break

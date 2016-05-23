@@ -66,14 +66,11 @@ class StreamContext():
         for value in values:
             if (col == 8):
                 col = 0
-                print
-                ""
-            print
-            "%04x" % (value),
+                print("")
+            print("%04x" % (value))
             col += 1
 
-        print
-        "\n"
+        print("\n")
 
     def feed(self, value_out, value_in):
 
@@ -107,8 +104,7 @@ class StreamContext():
             # Write register port
             if (self.addr(self.stack[0]) == 0xA00):
                 if (self.rw_size == 1):
-                    print
-                    "rw_size == 1, skipping expected value"
+                    print ("rw_size == 1, skipping expected value")
                     self.clear_rw_context()
                     self.feed(value_out, value_in)
 
@@ -124,8 +120,7 @@ class StreamContext():
                 return
 
             print("WRITE_INTERNAL(%04x,%04x)" % (self.addr(self.stack[0]), self.stack[1]))
-            print
-            get_reg(self.addr(self.stack[0]), self.stack[1])
+            print(get_reg(self.addr(self.stack[0]), self.stack[1]))
 
             # Check for host control byte size
             if (self.addr(self.stack[0]) == 0x600):
@@ -141,8 +136,7 @@ class StreamContext():
         elif (self.context == WRITE_EXTERNAL):
             self.stack.append(value_out)
             if (self.rw_size == 1):
-                print
-                "rw_size == 1, skipping expected value"
+                print("rw_size == 1, skipping expected value")
                 self.clear_rw_context()
                 self.feed(value_out, value_in)
                 return
@@ -161,8 +155,7 @@ class StreamContext():
             # Read register port
             if (self.addr(self.stack[0]) == 0x800):
                 if (self.rw_size == 1):
-                    print
-                    "rw_size == 1, skipping expected value"
+                    print("rw_size == 1, skipping expected value")
                     self.clear_rw_context()
                     self.feed(value_out, value_in)
                     return
@@ -176,16 +169,14 @@ class StreamContext():
                 return
 
             print("READ_INTERNAL (%04x) == %04x" % (self.addr(self.stack[0]), self.stack[1]))
-            print
-            get_reg(self.addr(self.stack[0]), self.stack[1])
+            print(get_reg(self.addr(self.stack[0]), self.stack[1]))
 
             self.reset_context()
 
         elif (self.context == READ_EXTERNAL):
             self.stack.append(value_in)
             if (self.rw_size == 1):
-                print
-                "rw_size == 1, skipping expected value"
+                print("rw_size == 1, skipping expected value")
                 self.clear_rw_context()
                 self.feed(value_out, value_in)
                 return
